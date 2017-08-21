@@ -4,6 +4,7 @@ import email
 import re
 import os
 
+
 def connect():
 	config = configparser.ConfigParser()
 	config.read([os.path.expanduser('~/.fahadConfig')])
@@ -38,7 +39,9 @@ def getMailDetail(m, emailid):
 		if part.get_content_type() == 'text/html':
 			html = part.get_payload(decode=True)
 	html = html.decode("utf-8")
+	# Remove HTML tags
 	html = re.sub('<[^<]+?>', '', html)
+	# Remove spaces
 	html = html.strip()
 	print('***START BODY ***')
 	print(html)
